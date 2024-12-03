@@ -15,7 +15,7 @@ app.use('/api/products', ProductRoutes);
 app.use('/api/orders', orderRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send({
+  res.json({
     status: true,
     message: 'Server Live',
   });
