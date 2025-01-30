@@ -23,10 +23,7 @@ const getAllProducts = catchAsync(async (req, res) => {
   // const { searchTerm } = req.query;
 
   // Pass the searchTerm to the service
-  const { data, meta } = await ProductServices.getAllProductsFromDB(
-    // searchTerm as string,
-    req.query,
-  );
+  const { data, meta } = await ProductServices.getAllProductsFromDB(req.query);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,

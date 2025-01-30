@@ -49,8 +49,13 @@ const getSingleProductFromDB = async (id: string) => {
 };
 
 // Update Book Product
-const updateProductFromDB = async (id: string, data: TProduct) => {
-  const result = await ProductModel.findByIdAndUpdate({ _id: id }, data, {
+const updateProductFromDB = async (id: string, product: Partial<TProduct>) => {
+  const existingProduct = ProductModel.isProductExists(id);
+  if (!existingProduct) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Product Does Not Exist');
+  }
+
+  const result = await ProductModel.findByIdAndUpdate({ _id: id }, product, {
     new: true,
   });
   return result;
@@ -58,6 +63,11 @@ const updateProductFromDB = async (id: string, data: TProduct) => {
 
 // Delete Product
 const deleteProductFromDB = async (id: string) => {
+  const existingProduct = ProductModel.isProductExists(id);
+  if (!existingProduct) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Product does not exist');
+  }
+  
   const result = await ProductModel.updateOne({ _id: id }, { isDeleted: true });
   return result;
 };
