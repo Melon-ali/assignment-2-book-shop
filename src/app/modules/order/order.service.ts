@@ -1,4 +1,5 @@
-import { ProductModel } from '../product.model';
+
+import { ProductModel } from '../product/product.model';
 import { TOrder } from './order.interface';
 import { OrderModel } from './order.model';
 

@@ -1,6 +1,9 @@
 import { FilterQuery, Query } from 'mongoose';
 
 class QueryBuilder<T> {
+  sort() {
+    throw new Error('Method not implemented.');
+  }
   public modelQuery: Query<T[], T>;
   public query: Record<string, unknown>;
 

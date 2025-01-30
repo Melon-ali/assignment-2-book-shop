@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ProductServices } from './product.service';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
@@ -19,18 +20,20 @@ const createProduct = catchAsync(async (req, res) => {
 // Get All Products
 const getAllProducts = catchAsync(async (req, res) => {
   // Extract searchTerm from query parameters
-  const { searchTerm } = req.query;
+  // const { searchTerm } = req.query;
 
   // Pass the searchTerm to the service
-  const result = await ProductServices.getAllProductsFromDB(
-    searchTerm as string,
+  const { data, meta } = await ProductServices.getAllProductsFromDB(
+    // searchTerm as string,
+    req.query,
   );
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
     message: 'Books retrieved successfully',
-    data: result,
+    data,
+    meta,
   });
 });
 
